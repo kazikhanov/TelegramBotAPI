@@ -1,12 +1,12 @@
-from aiogram.types import Message
+from aiogram.types import  Location, Message
 from aiogram.filters import CommandStart, Command
 import keyboards as kb
-from aiogram import Router
+from aiogram import Router, F
 import CommandsText as text
 router = Router()
 import asyncio
 from weather_api import main, temp
-
+import IItest
 
 
 
@@ -50,3 +50,18 @@ async def cmd_now(message:Message):
         print(
             True
         )
+
+@router.message(F.location)
+async def handler_location(message: Message):
+    loc = message.location
+
+    loc_txt = (str(loc.latitude) + "," + str(loc.longitude))
+    print(loc_txt)
+    res = await main(loc_txt)
+    await message.answer(res)
+
+
+@router.message(Command('ai'))
+async def ai(message:Message):
+    res = await IItest.deepseek(message.text.split()[1:])
+    await message.answer(res)

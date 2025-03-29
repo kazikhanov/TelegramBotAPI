@@ -11,8 +11,8 @@ async def main(city):
 
 
 
-            out = (f"Погода в {city}:\n"
-                   f"\nВ {city} сейчас {response['current']['condition']['text'].lower()}.\n"
+            out = (f"Погода в {response['location']['name']}:\n"
+                   f"\nВ {response['location']['name']} сейчас {response['current']['condition']['text'].lower()}.\n"
                    f"Температура {response['current']['temp_c']}°C.\n"
                    f"Температура ощушается как {response['current']['feelslike_c']}°C.\n"
                    f"Скорость ветра {response['current']['wind_kph']} km/h\n"
@@ -32,8 +32,8 @@ async def temp(city):
                                params={'q':f'{city}', 'days':'1', 'lang':'ru'}) as resp:
             response = await resp.json()
 
-            out = (f"Температура в {city} {response['current']['temp_c']}°C")
-
+            out = (f"Температура в {response['location']['name']} {response['current']['temp_c']}°C")
+            print()
             return out
 
-
+print(asyncio.run(temp('48.8567,2.3508')))
