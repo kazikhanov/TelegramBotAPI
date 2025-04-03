@@ -9,8 +9,6 @@ async def deepseek(content):
         headers={
             "Authorization": f"Bearer {API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "<YOUR_SITE_URL>",  # Optional. Site URL for rankings on openrouter.ai.
-            "X-Title": "<YOUR_SITE_NAME>",  # Optional. Site title for rankings on openrouter.ai.
         },
         data=json.dumps({
             "model": "deepseek/deepseek-chat-v3-0324:free",
